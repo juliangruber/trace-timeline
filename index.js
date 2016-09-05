@@ -18,25 +18,28 @@ module.exports = (trace) => {
       height: '400px'
     })}">
       <div style="${css({
-        backgroundColor: 'lightgray',
+        backgroundColor: 'lightblue',
         position: 'absolute',
         height: '1em',
         width: '100%'
       })}">
-        ${Array(Math.round(width / 200)).fill(0).map((_, i, arr) => yo`
-          <span style="${css({
-            position: 'absolute',
-            left: `${width / arr.length * i}px`
-          })}">
-            | ${dt / arr.length * i}ms
-          </span>
-        `)}
       </div>
+      ${Array(Math.round(width / 200)).fill(0).map((_, i, arr) => yo`
+        <span style="${css({
+          position: 'absolute',
+          left: `${width / arr.length * i - 1}px`,
+          height: '100%',
+          borderLeft: '1px solid lightgray',
+          paddingLeft: '4px'
+        })}">
+          ${dt / arr.length * i}ms
+        </span>
+      `)}
       ${trace.spans.map((span, i) => yo`
         <div style="${css({
           position: 'absolute',
           top: `${i * 5 + 2}em`,
-          left: `${(span.start - start) / dt * width}px`,
+          left: `${(span.start - start) / dt * width - 1}px`,
           right: `${width * (1 - (span.end - start) / dt)}px`,
           backgroundColor: '#ff8',
           border: '1px solid lightblue',
@@ -48,7 +51,7 @@ module.exports = (trace) => {
           ${span.annotations.map(annotation => yo`
             <span style=${css({
               position: 'absolute',
-              left: `${(annotation.ts - span.start) / dt * width + 1}px`,
+              left: `${(annotation.ts - span.start) / dt * width - 1}px`,
               borderLeft: '1px solid lightblue',
               paddingLeft: '4px',
               top: '1.5em',
