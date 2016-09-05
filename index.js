@@ -17,10 +17,25 @@ module.exports = (trace) => {
       width: `${width}px`,
       height: '400px'
     })}">
+      <div style="${css({
+        backgroundColor: 'lightgray',
+        position: 'absolute',
+        height: '1em',
+        width: '100%'
+      })}">
+        ${Array(Math.round(width / 200)).fill(0).map((_, i, arr) => yo`
+          <span style="${css({
+            position: 'absolute',
+            left: `${width / arr.length * i}px`
+          })}">
+            | ${dt / arr.length * i}ms
+          </span>
+        `)}
+      </div>
       ${trace.spans.map((span, i) => yo`
         <div style="${css({
           position: 'absolute',
-          top: `${i * 5}em`,
+          top: `${i * 5 + 2}em`,
           left: `${(span.start - start) / dt * width}px`,
           right: `${width * (1 - (span.end - start) / dt)}px`,
           backgroundColor: '#ff8',
