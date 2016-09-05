@@ -20,7 +20,7 @@ module.exports = (trace) => {
       ${trace.spans.map((span, i) => yo`
         <div style="${css({
           position: 'absolute',
-          top: `${i * 2}em`,
+          top: `${i * 5}em`,
           left: `${(span.start - start) / dt * width}px`,
           right: `${width * (1 - (span.end - start) / dt)}px`,
           backgroundColor: '#ff8',

@@ -36,6 +36,17 @@ document.body.appendChild(render({
           title: 'template rendered'
         }
       ]
+    },
+    {
+      id: 'span-3',
+      start: new Date(now - 750),
+      end: new Date(now - 250),
+      annotations: [
+        {
+          ts: now - 500,
+          title: 'calculated'
+        }
+      ]
     }
   ]
 }))
