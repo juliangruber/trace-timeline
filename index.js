@@ -56,7 +56,9 @@ module.exports = (trace) => {
               paddingLeft: '4px',
               top: '1.5em',
               lineHeight: '1em',
-              paddingTop: '0.5em'
+              paddingTop: '0.5em',
+              backgroundColor: 'white',
+              marginTop: '1px'
             })}>
               ${annotation.title}
             </span>
