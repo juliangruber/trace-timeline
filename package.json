@@ -1,6 +1,6 @@
 {
   "name": "trace-timeline",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Render a timeline depicting generic tracing information",
   "repository": "juliangruber/trace-timeline",
   "license": "MIT",
