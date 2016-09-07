@@ -10,6 +10,8 @@ module.exports = (trace) => {
   const end = trace.spans.reduce((acc, span) =>
     Math.max(acc, span.end.getTime()), 0)
   const dt = end - start
+  const lineDt = 200
+  const paddedDt = dt + lineDt
 
   return yo`
     <div style="${css({
@@ -24,7 +26,7 @@ module.exports = (trace) => {
         width: '100%'
       })}">
       </div>
-      ${Array(Math.round(width / 200)).fill(0).map((_, i, arr) => yo`
+      ${Array(Math.floor(dt / lineDt) + 1).fill(0).map((_, i, arr) => yo`
         <span style="${css({
           position: 'absolute',
           left: `${width / arr.length * i - 1}px`,
@@ -32,15 +34,15 @@ module.exports = (trace) => {
           borderLeft: '1px solid lightgray',
           paddingLeft: '4px'
         })}">
-          ${dt / arr.length * i}ms
+          ${lineDt * i}ms
         </span>
       `)}
       ${trace.spans.map((span, i) => yo`
         <div style="${css({
           position: 'absolute',
           top: `${i * 5 + 2}em`,
-          left: `${(span.start - start) / dt * width - 1}px`,
-          right: `${width * (1 - (span.end - start) / dt)}px`,
+          left: `${(span.start - start) / paddedDt * width - 1}px`,
+          right: `${width * (1 - (span.end - start) / paddedDt)}px`,
           backgroundColor: '#ff8',
           border: '1px solid lightblue',
           paddingLeft: '7px',
@@ -51,7 +53,7 @@ module.exports = (trace) => {
           ${span.annotations.map(annotation => yo`
             <span style=${css({
               position: 'absolute',
-              left: `${(annotation.ts - span.start) / dt * width - 1}px`,
+              left: `${(annotation.ts - span.start) / paddedDt * width - 1}px`,
               borderLeft: '1px solid lightblue',
               paddingLeft: '4px',
               top: '1.5em',
